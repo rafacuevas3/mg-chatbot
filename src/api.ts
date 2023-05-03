@@ -47,7 +47,7 @@ api.get('/chat', async (req, res) => {
           headers: {
             'Content-Type': 'application/json',
             Authorization:
-              'Bearer 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'
+              'Bearer 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'
           }
         }
       )
