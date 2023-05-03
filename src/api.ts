@@ -18,11 +18,25 @@ app.get('/', (req, res) => {
 const api = express.Router();
 
 api.get('/validate', (req, res) => {
+  // check if verification token is correct
   if (req.query.token !== process.env.TOKEN) {
     return res.sendStatus(401);
   }
 
-  return res.end(req.query.challenge);
+  // print request body
+  console.log(req.body);
+
+  // return a text response
+  const data = {
+    responses: [
+      {
+        type: 'randomText',
+        messages: ['Hi', 'Hello']
+      }
+    ]
+  };
+
+  res.json(data);
 });
 
 api.get('/hello', (req, res) => {
@@ -65,10 +79,7 @@ api.get('/chat', async (req, res) => {
       .then((response) => {
         console.log('Success fetching OpenAI');
 
-        return {
-          message: response.data.choices[0].message.content,
-          status: 'Ok'
-        };
+        return response.data.choices[0].message.content;
       })
       .catch((error) => {
         console.log('Failure fetching OpenAI');
@@ -76,7 +87,10 @@ api.get('/chat', async (req, res) => {
         console.log(error.config.headers);
       });
 
-    res.status(200).send({ response: r });
+    res.status(200).send({
+      type: 'text',
+      message: r
+    });
   } catch (e) {
     res.status(400).send({ message: e });
   }
