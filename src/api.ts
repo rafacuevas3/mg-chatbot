@@ -17,7 +17,11 @@ app.get('/', (req, res) => {
 
 const api = express.Router();
 
-api.get('/validate', (req, res) => {
+api.get('/hello', (req, res) => {
+  res.status(200).send({ message: 'hello world' });
+});
+
+api.get('/chat', (req, res) => {
   // check if verification token is correct
   if (req.query.token !== process.env.TOKEN) {
     return res.sendStatus(401);
@@ -26,33 +30,7 @@ api.get('/validate', (req, res) => {
   return res.end(req.query.challenge);
 });
 
-api.get('/demo', (req, res) => {
-  // check if verification token is correct
-  if (req.query.token !== process.env.TOKEN) {
-    return res.sendStatus(401);
-  }
-
-  // print request body
-  console.log(req.body);
-
-  // return a text response
-  const data = {
-    responses: [
-      {
-        type: 'text',
-        messages: 'Demo message'
-      }
-    ]
-  };
-
-  return res.json(data);
-});
-
-api.get('/hello', (req, res) => {
-  res.status(200).send({ message: 'hello world' });
-});
-
-api.get('/chat', async (req, res) => {
+api.post('/chat', async (req, res) => {
   try {
     const model = req.query.model || 'gpt-3.5-turbo-0301';
     const temperature = req.query.temperature || 0.16;
