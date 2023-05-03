@@ -19,7 +19,7 @@ const api = express.Router();
 
 api.get('/validate', (req, res) => {
   if (req.query.token !== process.env.TOKEN) {
-    return res.sendStatus(401)
+    return res.sendStatus(401);
   }
 
   return res.end(req.query.challenge);
@@ -33,6 +33,10 @@ api.get('/chat', async (req, res) => {
   try {
     const model = req.query.model || 'gpt-3.5-turbo-0301';
     const temperature = req.query.temperature || 0.16;
+
+    if (req.query.token !== process.env.TOKEN) {
+      res.sendStatus(401);
+    }
 
     const messages = [
       {
