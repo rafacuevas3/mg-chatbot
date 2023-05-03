@@ -12,14 +12,18 @@ app.use(express.text({ type: 'text/html' }));
 
 // Healthcheck endpoint
 app.get('/', (req, res) => {
+  res.status(200).send({ status: 'ok' });
+});
+
+const api = express.Router();
+
+api.get('/validate', (req, res) => {
   if (req.query.token !== process.env.TOKEN) {
     return res.sendStatus(401)
   }
 
   return res.end(req.query.challenge);
 });
-
-const api = express.Router();
 
 api.get('/hello', (req, res) => {
   res.status(200).send({ message: 'hello world' });
