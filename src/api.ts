@@ -45,8 +45,9 @@ api.get('/chat', async (req, res) => {
         },
         {
           headers: {
-            'Content-Type': 'text/json',
-            Authorization: `Bearer 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`
+            'Content-Type': 'application/json',
+            Authorization:
+              'Bearer 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'
           }
         }
       )
@@ -60,7 +61,9 @@ api.get('/chat', async (req, res) => {
       })
       .catch((error) => {
         console.log('Failure fetching OpenAI');
-        console.log(JSON.stringify(error));
+        console.log(error);
+        console.log(error.headers);
+        console.log(error.config.headers);
       });
 
     res.status(200).send({ message: r });
