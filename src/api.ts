@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import axios from 'axios';
 
 export const app = express();
 
@@ -18,6 +19,50 @@ const api = express.Router();
 
 api.get('/hello', (req, res) => {
   res.status(200).send({ message: 'hello world' });
+});
+
+api.get('/chat', async (req, res) => {
+  try {
+    const model = req.query.model || 'gpt-3.5-turbo';
+    const temperature = req.query.temperature || 0.16;
+
+    const messages = [
+      {
+        role: 'system',
+        content:
+          "You are an AI Assistant specialized in Auto and Car Insurance. You can communicate effectively with people and answering \
+      their questions regarding their auto insurance needs. Your answers are based on the pages listed on this sitemap 'https://www.moneygeek.com/auto-flex-sitemap.xml'"
+      },
+      { role: 'user', content: req.query.message }
+    ];
+
+    const res = await axios
+      .post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model,
+          temperature,
+          messages
+        },
+        {
+          headers: {
+            'Content-Type': 'text/json',
+            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+          }
+        }
+      )
+      .then((response) => {
+        console.log('Success fetching OpenAI');
+
+        return response.data.choices[0].message.content;
+      })
+      .catch((error) => {
+        console.log('Failure fetching OpenAI');
+        console.log(JSON.stringify(error));
+      });
+
+    res.status(200).send({ message: res });
+  } catch (e) {}
 });
 
 // Version the api
