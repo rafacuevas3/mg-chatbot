@@ -30,8 +30,7 @@ api.get('/chat', async (req, res) => {
       {
         role: 'system',
         content:
-          "You are an AI Assistant specialized in Auto and Car Insurance. You can communicate effectively with people and answering \
-      their questions regarding their auto insurance needs. Your answers are based on the pages listed on this sitemap 'https://www.moneygeek.com/auto-flex-sitemap.xml'"
+          "You are an AI Assistant specialized in Auto and Car Insurance. You can communicate effectively with people and answering their questions regarding their auto insurance needs. Your answers are based on the pages listed on this sitemap 'https://www.moneygeek.com/auto-flex-sitemap.xml'"
       },
       { role: 'user', content: req.query.message }
     ];
@@ -46,7 +45,7 @@ api.get('/chat', async (req, res) => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'text/json',
             Authorization: `Bearer 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`
           }
         }
