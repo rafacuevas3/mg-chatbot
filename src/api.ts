@@ -30,8 +30,8 @@ api.get('/validate', (req, res) => {
   const data = {
     responses: [
       {
-        type: 'randomText',
-        messages: ['Hi', 'Hello']
+        type: 'text',
+        messages: 'Demo message'
       }
     ]
   };
