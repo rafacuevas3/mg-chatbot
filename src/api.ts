@@ -23,7 +23,7 @@ api.get('/hello', (req, res) => {
 
 api.get('/chat', async (req, res) => {
   try {
-    const model = req.query.model || 'gpt-3.5-turbo';
+    const model = req.query.model || 'gpt-3.5-turbo-0301';
     const temperature = req.query.temperature || 0.16;
 
     const messages = [
