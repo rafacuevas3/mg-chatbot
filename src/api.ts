@@ -65,7 +65,7 @@ api.get('/chat', async (req, res) => {
         console.log(error.config.headers);
       });
 
-    res.status(200).send({ message: r });
+    res.status(200).send({ response: r });
   } catch (e) {
     res.status(400).send({ message: e });
   }
