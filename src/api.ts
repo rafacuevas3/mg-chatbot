@@ -36,7 +36,7 @@ api.get('/chat', async (req, res) => {
       { role: 'user', content: req.query.message }
     ];
 
-    const res = await axios
+    const r = await axios
       .post(
         'https://api.openai.com/v1/chat/completions',
         {
@@ -61,8 +61,10 @@ api.get('/chat', async (req, res) => {
         console.log(JSON.stringify(error));
       });
 
-    res.status(200).send({ message: res });
-  } catch (e) {}
+    res.status(200).send({ message: r });
+  } catch (e) {
+    res.status(400).send({ message: e });
+  }
 });
 
 // Version the api
