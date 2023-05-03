@@ -23,6 +23,15 @@ api.get('/validate', (req, res) => {
     return res.sendStatus(401);
   }
 
+  return res.end(req.query.challenge);
+});
+
+api.get('/demo', (req, res) => {
+  // check if verification token is correct
+  if (req.query.token !== process.env.TOKEN) {
+    return res.sendStatus(401);
+  }
+
   // print request body
   console.log(req.body);
 
