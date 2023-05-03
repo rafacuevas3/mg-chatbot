@@ -49,7 +49,7 @@ api.get('/chat', async (req, res) => {
           headers: {
             'Content-Type': 'application/json',
             Authorization:
-              'Bearer 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'
+              'Bearer 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'
           }
         }
       )
