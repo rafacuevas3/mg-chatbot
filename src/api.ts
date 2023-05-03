@@ -21,6 +21,8 @@ api.get('/hello', (req, res) => {
   res.status(200).send({ message: 'hello world' });
 });
 
+// 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
+
 api.get('/chat', async (req, res) => {
   try {
     const model = req.query.model || 'gpt-3.5-turbo-0301';
@@ -47,7 +49,7 @@ api.get('/chat', async (req, res) => {
           headers: {
             'Content-Type': 'application/json',
             Authorization:
-              'Bearer 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'
+              'Bearer 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'
           }
         }
       )
