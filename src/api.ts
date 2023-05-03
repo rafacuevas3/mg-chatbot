@@ -40,6 +40,7 @@ api.post('/chat', async (req, res) => {
     }
 
     console.log(JSON.stringify(req.query))
+    console.log(JSON.stringify(req.body))
 
     const messages = [
       {
