@@ -75,8 +75,12 @@ api.post('/chat', async (req, res) => {
       });
 
     res.status(200).send({
-      type: 'text',
-      message: r
+      responses: [
+        {
+          type: 'text',
+          message: r
+        }
+      ]
     });
   } catch (e) {
     res.status(400).send({ message: e });
