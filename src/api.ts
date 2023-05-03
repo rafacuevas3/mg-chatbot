@@ -46,7 +46,7 @@ api.get('/chat', async (req, res) => {
         },
         {
           headers: {
-            'Content-Type': 'text/json',
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
           }
         }
@@ -54,7 +54,10 @@ api.get('/chat', async (req, res) => {
       .then((response) => {
         console.log('Success fetching OpenAI');
 
-        return response.data.choices[0].message.content;
+        return {
+          message: response.data.choices[0].message.content,
+          status: 'Ok'
+        };
       })
       .catch((error) => {
         console.log('Failure fetching OpenAI');
