@@ -39,6 +39,8 @@ api.post('/chat', async (req, res) => {
       res.sendStatus(401);
     }
 
+    console.log(JSON.stringify(req.query))
+
     const messages = [
       {
         role: 'system',
