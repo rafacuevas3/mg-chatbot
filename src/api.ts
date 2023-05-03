@@ -36,7 +36,7 @@ api.get('/validate', (req, res) => {
     ]
   };
 
-  res.json(data);
+  return res.json(data);
 });
 
 api.get('/hello', (req, res) => {
