@@ -47,7 +47,7 @@ api.get('/chat', async (req, res) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+            Authorization: `Bearer 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`
           }
         }
       )
